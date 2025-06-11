@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const db = require('./db');
+require('./seed_gramineas'); // para ejecutar el seed 
+
 
 // Middlewares
 app.use(cors());
