@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// 👤 Obtener todos los usuarios (opcional para pruebas)
+// 👤 Obtener todos los usuarios (opcion para pruebas)
 router.get('/', (req, res) => {
   db.all('SELECT * FROM usuarios', [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });

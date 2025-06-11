@@ -21,13 +21,12 @@ app.use('/eventos', eventosRouter);
 app.use('/gramineas', gramineasRouter);
 app.use('/hato', vacasRouter);
 
-// No usar db.connect() con SQLite
-// Ya se conecta automáticamente en db.js
-// Puedes imprimir algo como confirmación aquí si quieres
+
+
 console.log('✅ Conexión a SQLite inicializada');
 
 // Iniciar servidor
-const PORT = process.env.PORT || 3001; // Cambié de 3000 a 3001
+const PORT = process.env.PORT || 3001; // Cambio de puerto 3000 a 3001
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);

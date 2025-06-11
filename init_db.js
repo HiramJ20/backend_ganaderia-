@@ -21,8 +21,12 @@ db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS gramineas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
-    tipo TEXT NOT NULL
+    tipo TEXT NOT NULL,
+    descripcion TEXT,
+    uso TEXT,
+    resistencia TEXT
   )`);
+
 
   db.run(`CREATE TABLE IF NOT EXISTS vacas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
