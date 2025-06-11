@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./ganaderia.db');
 
-// Lista de gramíneas 
+// Lista de gramíneas
 const gramineas = [
   {
     nombre: 'Pasto Elefante',
@@ -47,16 +47,31 @@ const gramineas = [
   }
 ];
 
-// Inserción en la base de datos
 db.serialize(() => {
   gramineas.forEach((g) => {
-    db.run(
-      `INSERT INTO gramineas (nombre, tipo, descripcion, uso, resistencia) VALUES (?, ?, ?, ?, ?)`,
-      [g.nombre, g.tipo, g.descripcion, g.uso, g.resistencia]
-    );
-  });
+    db.get(`SELECT 1 FROM gramineas WHERE nombre = ?`, [g.nombre], (err, row) => {
+      if (err) {
+        console.error(`❌ Error al buscar ${g.nombre}:`, err.message);
+        return;
+      }
 
-  console.log('✅ Gramíneas insertadas correctamente en ganaderia.db');
+      if (!row) {
+        db.run(
+          `INSERT INTO gramineas (nombre, tipo, descripcion, uso, resistencia) VALUES (?, ?, ?, ?, ?)`,
+          [g.nombre, g.tipo, g.descripcion, g.uso, g.resistencia],
+          (insertErr) => {
+            if (insertErr) {
+              console.error(`❌ Error al insertar ${g.nombre}:`, insertErr.message);
+            } else {
+              console.log(`✅ Insertado: ${g.nombre}`);
+            }
+          }
+        );
+      } else {
+        console.log(`ℹ️ Ya existe: ${g.nombre}`);
+      }
+    });
+  });
 });
 
 db.close();
