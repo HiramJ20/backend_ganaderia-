@@ -7,17 +7,14 @@ const db = new sqlite3.Database(dbPath);
 
 // Crear tablas
 db.serialize(() => {
-  db.run(`CREATE TABLE IF NOT EXISTS usuarios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL
-  )`);
-
+  // Tabla de eventos
   db.run(`CREATE TABLE IF NOT EXISTS eventos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo TEXT NOT NULL,
     fecha TEXT NOT NULL
   )`);
 
+  // Tabla de gramíneas
   db.run(`CREATE TABLE IF NOT EXISTS gramineas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
@@ -27,7 +24,7 @@ db.serialize(() => {
     resistencia TEXT
   )`);
 
-
+  // Tabla de vacas
   db.run(`CREATE TABLE IF NOT EXISTS vacas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
@@ -35,7 +32,18 @@ db.serialize(() => {
     raza TEXT NOT NULL
   )`);
 
+  // ✅ NUEVA: Tabla de enfermedades
+  db.run(`CREATE TABLE IF NOT EXISTS enfermedades (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    sintomas TEXT,
+    tratamiento TEXT,
+    prevencion TEXT
+  )`);
+
   console.log("✅ Tablas creadas correctamente en ganaderia.db");
 });
 
 db.close();
+
+  

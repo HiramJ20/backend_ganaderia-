@@ -7,15 +7,13 @@ const db = require('./db');
 app.use(cors());
 app.use(express.json());
 
-// Rutas
-const authRouter = require('./routes/auth');
-const usuariosRouter = require('./routes/usuarios');
+// Rutas activas
+const enfermedadesRouter = require('./routes/enfermedades');
 const eventosRouter = require('./routes/eventos');
 const gramineasRouter = require('./routes/gramineas');
 const vacasRouter = require('./routes/vacas');
 
-app.use('/api', authRouter);
-app.use('/usuarios', usuariosRouter);
+app.use('/enfermedades', enfermedadesRouter);
 app.use('/eventos', eventosRouter);
 app.use('/gramineas', gramineasRouter);
 app.use('/hato', vacasRouter);
